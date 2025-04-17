@@ -30,10 +30,19 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        if (controller.enabled) UpdateMovement();
+        if (controller.enabled)
+        {
+            UpdateMovement();
+        }
+        else
+        {
+            velocity = Vector3.zero; // 그래플링 중 등일 때 중력 효과 제거
+        }
+
         UpdateCameraRotation();
         CheckYMovementForDestruction();
     }
+
 
 
     private void UpdateMovement()
