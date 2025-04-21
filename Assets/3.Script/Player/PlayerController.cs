@@ -25,7 +25,6 @@ public class PlayerController : MonoBehaviour
     {
         controller = GetComponent<CharacterController>();
         initialCameraRotation = cameraTransform.localRotation;
-        lastYPosition = transform.position.y;
     }
 
     private void Update()
@@ -40,7 +39,7 @@ public class PlayerController : MonoBehaviour
         }
 
         UpdateCameraRotation();
-        CheckYMovementForDestruction();
+        CheckMovementForDestruction();
     }
 
 
@@ -79,23 +78,18 @@ public class PlayerController : MonoBehaviour
         cameraTransform.localRotation = initialCameraRotation * pitchRotation;
     }
 
-    private void CheckYMovementForDestruction()
-    {
-         Debug.Log($"[CHECK] Y변화량: {Mathf.Abs(transform.position.y - lastYPosition):F2}, 준비됨: {SumCheckManager.Instance.isReadyToDestroy}");
-
-        if (SumCheckManager.Instance.isReadyToDestroy &&
-            Mathf.Abs(transform.position.y - lastYPosition) > 0.039f)
-        {
-            Debug.Log("[DESTROY] 조건 만족, 큐브 파괴 실행");
-            DestroyManager.Instance.DestroyCubes(SumCheckManager.Instance.GetCubesToDestroy());
-            SumCheckManager.Instance.ClearAfterDestruction();
-        }
-
-        lastYPosition = transform.position.y;
-    }
-
-
-
+     private void CheckMovementForDestruction()
+     {
+         if (SumCheckManager.Instance.isReadyToDestroy)
+         {
+             if (Input.GetKeyDown(KeyCode.Space) || Input.GetMouseButtonDown(0))
+             {
+                 Debug.Log("[DESTROY] 입력 감지됨. 큐브 파괴 실행");
+                 DestroyManager.Instance.DestroyCubes(SumCheckManager.Instance.GetCubesToDestroy());
+                 SumCheckManager.Instance.ClearAfterDestruction();
+             }
+         }
+     }
     private void OnControllerColliderHit(ControllerColliderHit hit)
     {
         if (hit.gameObject.CompareTag("Cube"))
@@ -106,7 +100,7 @@ public class PlayerController : MonoBehaviour
             if (cube != null && !cube.isSelected)
             {
                 cube.isSelected = true; 
-                cube.UpdateColor();
+                cube.UpdateTextColor();
                 SumCheckManager.Instance.ToggleSelection(cube);
             }
         }

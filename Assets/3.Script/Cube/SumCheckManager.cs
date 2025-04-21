@@ -27,15 +27,20 @@ public class SumCheckManager : MonoBehaviour // 큐브 숫자합 및 조건 판�
         if (cube.isSelected)
         {
             if (!selectedCubes.Contains(cube))
+            {
                 selectedCubes.Add(cube);
+                Debug.Log($"[선택됨] {cube.name}, 값: {cube.value}");
+            }
         }
         else
         {
             selectedCubes.Remove(cube);
+            Debug.Log($"[해제됨] {cube.name}");
         }
 
-        CheckSumOnly(); // 파괴 조건만 판단, 실제 파괴는 나중에 실행
+        CheckSumOnly(); // 파괴 조건만 판단
     }
+
 
     /// 파괴 조건만 판단 (합이 정확히 10일 때만 준비 상태로 변경)
     private void CheckSumOnly()

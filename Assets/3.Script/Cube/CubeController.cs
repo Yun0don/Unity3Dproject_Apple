@@ -2,31 +2,30 @@ using System;
 using UnityEngine;
 using TMPro;
 
-public class CubeController : MonoBehaviour // 큐브 상태관리
+public class CubeController : MonoBehaviour
 {
     public int value;
     public bool isSelected = false;
 
-    private Renderer rend;
-    private Material matInstance;            
-    private TextMeshPro valueText;         
+    private TextMeshPro valueText;
+
     private void Start()
     {
-        rend = GetComponent<Renderer>();
-        matInstance = rend.material;        
-        valueText = GetComponentInChildren<TextMeshPro>(); 
+        valueText = GetComponentInChildren<TextMeshPro>();
 
         UpdateText();
-        UpdateColor();
+        UpdateTextColor();
     }
 
     public void Init(int val)
     {
         value = val;
+
         if (valueText == null)
             valueText = GetComponentInChildren<TextMeshPro>();
 
         UpdateText();
+        UpdateTextColor();
     }
 
     private void UpdateText()
@@ -35,14 +34,15 @@ public class CubeController : MonoBehaviour // 큐브 상태관리
             valueText.text = value.ToString();
     }
 
-    public void UpdateColor()
+    public void UpdateTextColor()
     {
-        if (matInstance != null)
-            matInstance.color = isSelected ? Color.green : Color.grey;
+        if (valueText != null)
+            valueText.color = isSelected ? Color.black : Color.white;
     }
+
     public void ResetColor()
     {
         isSelected = false;
-        UpdateColor();
+        UpdateTextColor();
     }
 }
