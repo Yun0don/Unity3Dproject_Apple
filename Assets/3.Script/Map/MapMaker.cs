@@ -11,7 +11,7 @@ public class MapMaker : MonoBehaviour
     [Header("Managers")]
     public NumberManager numberManager;
 
-    private Vector3 startCubePosition;
+    public static Vector3 startCubePosition { get; private set; } 
     public bool StartPositionReady { get; private set; } = false;
 
     public Vector3 GetStartPosition() => startCubePosition;

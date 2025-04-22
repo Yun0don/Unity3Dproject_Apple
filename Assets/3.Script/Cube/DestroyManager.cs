@@ -20,6 +20,10 @@ public class DestroyManager : MonoBehaviour // 큐브 파괴 전담 관리자
     {
         if (cubes == null || cubes.Count == 0) return;
 
+        // 점수 계산 로직 추가
+        int scoreToAdd = cubes.Count * 100;
+        ScoreManager.Instance?.AddScore(scoreToAdd);
+
         foreach (var cube in cubes)
         {
             if (cube != null)
@@ -28,4 +32,5 @@ public class DestroyManager : MonoBehaviour // 큐브 파괴 전담 관리자
 
         SumCheckManager.Instance.ClearAfterDestruction();
     }
+
 }

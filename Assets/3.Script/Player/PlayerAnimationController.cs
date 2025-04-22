@@ -29,4 +29,4 @@ public class PlayerAnimationController : MonoBehaviour
         animator.SetBool("Run", isRunning);
         animator.SetBool("Jump", isJumping);
     }
-}
+}   
