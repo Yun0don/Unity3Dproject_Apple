@@ -22,5 +22,7 @@ public class PlayerManager : MonoBehaviour
         Vector3 spawnPosition = startPos + Vector3.up * 5f;
 
         Instantiate(playerPrefab, spawnPosition, Quaternion.identity);
+        
+        // UIManager.Instance.ResetLife();
     }
 }

@@ -9,10 +9,6 @@ public class GrapplingHookUI : MonoBehaviour
     public Transform hookOrigin; // 손이나 발사 지점
     public LineRenderer aimLine; // 미리보기 라인렌더러
 
-    [Header("Colors")]
-    public Color canGrappleColor = Color.green;
-    public Color cannotGrappleColor = Color.red;
-
     private Camera cam;
 
     private void Start()
@@ -40,8 +36,6 @@ public class GrapplingHookUI : MonoBehaviour
                 aimLine.positionCount = 2;
                 aimLine.SetPosition(0, hookOrigin.position);
                 aimLine.SetPosition(1, hit.point);
-                aimLine.startColor = canGrappleColor;
-                aimLine.endColor = canGrappleColor;
             }
         }
         else

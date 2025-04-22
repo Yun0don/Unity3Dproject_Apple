@@ -22,7 +22,7 @@ public class DestroyManager : MonoBehaviour // 큐브 파괴 전담 관리자
 
         // 점수 계산 로직 추가
         int scoreToAdd = cubes.Count * 100;
-        ScoreManager.Instance?.AddScore(scoreToAdd);
+        UIManager.Instance?.AddScore(scoreToAdd);
 
         foreach (var cube in cubes)
         {
