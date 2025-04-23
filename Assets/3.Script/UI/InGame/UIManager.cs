@@ -1,5 +1,6 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.Rendering;
 using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
@@ -19,6 +20,21 @@ public class UIManager : MonoBehaviour
     private float elapsedTime = 0f;
     private bool isTimerRunning = true;
 
+    [Header("Panel UI")] 
+    public Button pauseButton;
+    public GameObject pausePanel;
+    public GameObject gameOverPanel;
+    
+    [Header("Pause UI")] 
+    public Button continueButton;
+    public Button restartButtonP;
+    public Button mainButtonP;
+    
+    [Header("GameOver UI")] 
+    public TMP_Text gameOverScoreText;
+    public TMP_Text gameOverTimerText;
+    public Button restartButtonG;
+    public Button mainButtonG;
     private void Awake()
     {
         if (Instance != null && Instance != this)
@@ -27,6 +43,8 @@ public class UIManager : MonoBehaviour
             return;
         }
         Instance = this;
+
+        ResetPanel();
     }
 
     private void Start()
@@ -35,6 +53,11 @@ public class UIManager : MonoBehaviour
         ResetScore();
         ResetTimer();
         UpdateScoreUI();
+        
+        if (pauseButton != null)
+        {
+            pauseButton.onClick.AddListener(ShowPausePanel);
+        }
     }
 
     private void Update()
@@ -109,5 +132,50 @@ public class UIManager : MonoBehaviour
         {
             heart.SetActive(true);
         }
+    }
+
+    public void ResetPanel()
+    {
+        if (pausePanel != null)
+            pausePanel.SetActive(false);
+        if (gameOverPanel != null)
+            gameOverPanel.SetActive(false);
+    }
+    public void ShowPausePanel()
+    {
+        if (pausePanel != null)
+            pausePanel.SetActive(true);
+        PauseTimer();
+    }
+
+    public void ClosePausePanel()
+    {
+        if (continueButton != null)
+        {
+            pausePanel.SetActive(false);
+            ResumeTimer();
+        }
+    }
+    public void ShowGameOverPanel()
+    {
+        Invoke(nameof(ShowGameOverPanelDelayed), 3.5f);
+    }
+
+    private void ShowGameOverPanelDelayed()
+    {
+        if (gameOverPanel != null)
+            gameOverPanel.SetActive(true);
+
+        PauseTimer();
+
+        //  점수 표시
+        if (gameOverScoreText != null)
+            gameOverScoreText.text = $"Score : {score}";
+
+        //  시간 표시
+        int minutes = Mathf.FloorToInt(elapsedTime / 60f);
+        int seconds = Mathf.FloorToInt(elapsedTime % 60f);
+        if (gameOverTimerText != null)
+            gameOverTimerText.text = $"Time : {minutes:D2}:{seconds:D2}";
     }
 }

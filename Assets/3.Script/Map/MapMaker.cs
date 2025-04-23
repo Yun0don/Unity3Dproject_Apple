@@ -67,4 +67,5 @@ public class MapMaker : MonoBehaviour
         Instantiate(startCubePrefab, startCubePosition, Quaternion.identity);
         StartPositionReady = true;
     }
+    
 }

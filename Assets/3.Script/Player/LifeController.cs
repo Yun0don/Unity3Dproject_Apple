@@ -28,8 +28,9 @@ public class LifeController : MonoBehaviour
             if (deathCount >= 3)
             {
                 animator.SetTrigger("DieTrigger");
-                Debug.Log("💀 플레이어 사망 횟수 초과! Game Over 처리");
-                // GameManager.Instance.GameOver(); 등
+                UIManager.Instance.ShowGameOverPanel();
+                Debug.Log(" 플레이어 사망 횟수 초과! Game Over 처리");
+                
             }
             else
             {
@@ -61,5 +62,5 @@ public class LifeController : MonoBehaviour
     {
         animator.SetTrigger("IdleTrigger");
     }
-
+    
 }
