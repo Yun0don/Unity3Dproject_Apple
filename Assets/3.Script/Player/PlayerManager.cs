@@ -4,21 +4,27 @@ using System.Collections;
 public class PlayerManager : MonoBehaviour
 {
     public GameObject playerPrefab;
-    public MapMaker mapMaker; // MapMaker에서 시작 위치를 받을 거야
+    public MapMaker mapMaker;
 
-    
     private IEnumerator Start()
     {
-        
-        // MapMaker가 시작 위치를 설정할 때까지 기다림
+        // 1) Null 체크
+        if (mapMaker == null) {
+            Debug.LogError("❌ mapMaker 할당 안됨!");
+            yield break;
+        }
+
+        // 2) 맵 생성 완료 대기
         yield return new WaitUntil(() => mapMaker.StartPositionReady);
 
-        // 준비된 시작 위치 받아오기
-        Vector3 startPos = mapMaker.GetStartPosition();
-        Vector3 spawnPosition = startPos + Vector3.up * 5f;
+        // 3) 시작 위치 꺼내오기
+        // -> 인스턴스 게터 사용 버전
+        // Vector3 startPos = mapMaker.GetStartPosition();
+        // -> static 프로퍼티 사용 버전
+        Vector3 startPos = MapMaker.StartCubePosition;
 
+        // 4) 스폰 위치 보정
+        Vector3 spawnPosition = startPos + Vector3.up * 5f;
         Instantiate(playerPrefab, spawnPosition, Quaternion.identity);
-        
-        // UIManager.Instance.ResetLife();
     }
 }

@@ -11,7 +11,7 @@ public class LifeController : MonoBehaviour
         MapMaker mapMaker = FindObjectOfType<MapMaker>();
         if (mapMaker != null)
         {
-            respawnPosition = MapMaker.startCubePosition + Vector3.up * 10f;
+            respawnPosition = MapMaker.StartCubePosition + Vector3.up * 10f;
         }
         else
         {
