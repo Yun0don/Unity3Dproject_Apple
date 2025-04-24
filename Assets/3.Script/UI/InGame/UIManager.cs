@@ -1,6 +1,5 @@
 using TMPro;
 using UnityEngine;
-using UnityEngine.Rendering;
 using UnityEngine.UI;
 
 public class UIManager : MonoBehaviour
@@ -58,6 +57,24 @@ public class UIManager : MonoBehaviour
         {
             pauseButton.onClick.AddListener(ShowPausePanel);
         }
+        if (restartButtonP != null)
+            restartButtonP.onClick.AddListener(() =>
+            {
+                // 패널 닫고, 씬 리스타트
+                ClosePausePanel();
+                SceneChanger sc = FindObjectOfType<SceneChanger>();
+                sc?.RestartLevel();
+            });
+
+        // GameOver 패널의 '다시하기'
+        if (restartButtonG != null)
+            restartButtonG.onClick.AddListener(() =>
+            {
+                gameOverPanel.SetActive(false);
+                SceneChanger sc = FindObjectOfType<SceneChanger>();
+                sc?.RestartLevel();
+            });
+        
     }
 
     private void Update()
@@ -66,6 +83,15 @@ public class UIManager : MonoBehaviour
         {
             elapsedTime += Time.deltaTime;
             UpdateTimerUI();
+        }
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            if (pausePanel == null) return;
+
+            if (pausePanel.activeSelf)
+                ClosePausePanel();
+            else
+                ShowPausePanel();
         }
     }
 
@@ -143,18 +169,18 @@ public class UIManager : MonoBehaviour
     }
     public void ShowPausePanel()
     {
-        if (pausePanel != null)
-            pausePanel.SetActive(true);
+        if (pausePanel == null || pausePanel.activeSelf) return;
+
+        pausePanel.SetActive(true);
         PauseTimer();
     }
 
     public void ClosePausePanel()
     {
-        if (continueButton != null)
-        {
-            pausePanel.SetActive(false);
-            ResumeTimer();
-        }
+        if (pausePanel == null || !pausePanel.activeSelf) return;
+
+        pausePanel.SetActive(false);
+        ResumeTimer();
     }
     public void ShowGameOverPanel()
     {

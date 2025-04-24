@@ -28,6 +28,7 @@ public class DestroyManager : MonoBehaviour // 큐브 파괴 전담 관리자
         {
             if (cube != null)
                 Destroy(cube.gameObject);
+            AudioManager.instance.PlayPopEffect();
         }
 
         SumCheckManager.Instance.ClearAfterDestruction();

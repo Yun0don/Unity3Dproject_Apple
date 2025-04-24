@@ -5325,7 +5325,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 750781606}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1239657588}
+        m_TargetAssemblyTypeName: SceneChanger, Assembly-CSharp
+        m_MethodName: RestartLevel
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &750781606
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7223,7 +7235,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 767cc54cd1c674c499d6a0cd108fb2cc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mapName: Square
+  defaultMapName: Square
   cubePrefab: {fileID: 2541028136999600323, guid: 9a5e9752c7cb68946b5a4c0eea6f116f,
     type: 3}
   startCubePrefab: {fileID: 5105745582677986173, guid: ade22b67c1ba1494da1e101686357b94,
@@ -14552,7 +14564,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 2071155843}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1239657588}
+        m_TargetAssemblyTypeName: SceneChanger, Assembly-CSharp
+        m_MethodName: RestartLevel
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &2071155843
 MonoBehaviour:
   m_ObjectHideFlags: 0
