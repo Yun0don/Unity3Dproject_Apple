@@ -27,6 +27,9 @@ public class AudioManager : MonoBehaviour
         }
 
         audioSource = GetComponent<AudioSource>();
+        audioSource.loop = true;
+        audioSource.playOnAwake = false;
+        
     }
 
     private void OnEnable()
@@ -45,7 +48,6 @@ public class AudioManager : MonoBehaviour
         audioSource.Play();
     }
 
-    // 씬이 로드될 때마다 호출
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         if (scene.name == "IntroScene")
@@ -65,17 +67,22 @@ public class AudioManager : MonoBehaviour
 
         audioSource.Stop();
         audioSource.clip = clip;
+        audioSource.loop = true;
         audioSource.Play();
     }
 
     // 예: 점프 효과음 재생
     public void PlayJumpEffect()
     {
+        audioSource.loop = false;
         audioSource.PlayOneShot(jumpEffect);
+        audioSource.loop = true;
     }
     
     public void PlayPopEffect()
-    {
+    {     
+        audioSource.loop = false;
         audioSource.PlayOneShot(popEffect);
+        audioSource.loop = true;
     }
 }
